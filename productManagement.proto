@@ -9,10 +9,10 @@ message GetProductRequest {
 }
 
 message GetProductResponse {
-  Product product = 1;
+  ProductProto product = 1;
 }
 
-message Product {
+message ProductProto {
   int32 id = 1;
   string name = 2;
   double price = 3;
