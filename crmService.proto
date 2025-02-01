@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service CrmService {
+  rpc SendNotificationEmail (SendNotificationEmailRequest) returns (SendNotificationEmailResponse);
+}
+
+message SendNotificationEmailRequest {
+  string recepientEmail = 1;
+}
+
+message SendNotificationEmailResponse {
+  string result = 1;
+}
