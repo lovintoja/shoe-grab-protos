@@ -9,5 +9,5 @@ message SendNotificationEmailRequest {
 }
 
 message SendNotificationEmailResponse {
-  string result = 1;
+  bool success = 1;
 }
