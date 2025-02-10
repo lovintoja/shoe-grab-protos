@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service OrderManagement {
+  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
+  rpc ChangeOrderStatus (ChangeOrderStatusRequest) returns (ChangeOrderStatusResponse);
+  rpc SearchOrders (SearchOrdersRequest) returns (SearchOrdersResponse);
+}
+
+message DeleteOrderRequest {
+  int32 id = 1;
+}
+
+message DeleteOrderResponse {
+  bool success = 1;
+}
+
+message ChangeOrderStatusRequest {
+  int32 id = 1;
+  string status = 2;
+}
+
+message ChangeOrderStatusResponse {
+  bool success = 1;
+}
+
+message SearchOrdersRequest {
+  int32 userId = 1;
+  google.protobuf.Timestamp startDate = 2;
+  google.protobuf.Timestamp endDate = 3;
+  string status = 4;
+  string paymentMethod = 5;
+  double minTotalPrice = 6;
+  double maxTotalPrice = 7;
+}
+
+message SearchOrdersResponse {
+  repeated OrderProto orders = 1;
+}
+
+message OrderProto {
+  int32 id = 1;
+  int32 userId = 2;
+  google.protobuf.Timestamp orderDate = 3;
+  string status = 4;
+  double totalPrice = 5;
+  AddressProto shippingAddress = 6;
+  PaymentInfoProto paymentInfo = 7;
+  string contactPhone = 8;
+  string note = 9;
+  repeated OrderItemProto items = 10;
+}
+
+message OrderItemProto {
+  int32 productId = 1;
+  string productName = 2;
+  int32 quantity = 3;
+  double unitPrice = 4;
+}
+
+message AddressProto {
+  string street = 1;
+  string city = 2;
+  string postalCode = 3;
+  string country = 4;
+}
+
+message PaymentInfoProto {
+  string paymentMethod = 1;
+  string transactionId = 2;
+  google.protobuf.Timestamp paymentDate = 3;
+}
